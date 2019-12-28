@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Zombe
+  m_Controller: {fileID: 9100000, guid: d0925a1e411a91a4283d768222b961a1, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 2dab40ac5b128b64597a953a033428e7,
+      type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 31c1a2a498086974eaa9d10c7f42d24d, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: e7979684fc284294d8c80da2feb24ca5,
+      type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: ec13975053ac9b04ba71483c47d8eed6, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: bd02e133d9ce90147af43dd29016895b,
+      type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 0aaab721d87c3d84daddd7c7a85d44fd, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 75048032b251ee74e9e84a6a29abc46c,
+      type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 834e65f16fa33e54da306a0c84cb2df6, type: 3}

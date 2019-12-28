@@ -19,13 +19,16 @@ public class CameraControl : MonoBehaviour
         PlayerTrm = GameObject.Find("Player").transform;
     }
     #endregion
+   /// <summary>
+   /// 延遲更新 
+   /// </summary>
     private void LateUpdate()
     {
         Track();
     }
     #region 方法
     /// <summary>
-    /// 追蹤玩家
+    /// 攝影機追蹤玩家
     /// </summary>
     void Track() 
     {

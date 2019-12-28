@@ -25,13 +25,16 @@ public class Player : MonoBehaviour
      Transform Target;
     [Header("玩家血量"),Range(0,9999)]
     public float HP;
+    public LevelManager m_level;
     
     #endregion
 
     #region 事件
     private void Awake()
     {
-        joy = GameObject.Find("Fixed Joystick").GetComponent<Joystick>();
+        //m_level = GameObject.Find("GameMannger").GetComponent<LevelManager>();
+        m_level = FindObjectOfType<LevelManager>();//透過類型取得元件
+           joy = GameObject.Find("Fixed Joystick").GetComponent<Joystick>();
         PlayerRig = GetComponent<Rigidbody>();//取得Rigidbody(泛形類別)元件
         PlayerAim= GetComponent<Animator>();
        // Target = GameObject.FindGameObjectWithTag("Target").transform;
@@ -94,7 +97,17 @@ public class Player : MonoBehaviour
     {
     }
     #endregion
-#endregion
+
+    #region 玩家進入下一關
+    private void OnTriggerEnter(Collider hit)
+    {
+        if (hit.GetComponent<Collider>().tag=="傳送區域")
+        {
+            m_level.StartCoroutine("LoadLevel");
+        }
+    }
+    #endregion
+    #endregion
 
 
 }
