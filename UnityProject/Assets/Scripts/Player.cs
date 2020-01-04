@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections;
 
+
 public class Player : MonoBehaviour
 {
     #region 屬性
@@ -23,10 +24,13 @@ public class Player : MonoBehaviour
     /// 面向目標物件
     /// </summary>
      Transform Target;
-    [Header("玩家血量"),Range(0,9999)]
-    public float HP;
-    public LevelManager m_level;
     
+    public LevelManager m_level;
+   [Header("玩家資料")]
+    public PlayerData _PlayerData;
+    [Header("HPcontrol")]
+    public HPbarControl _HPControl;
+
     #endregion
 
     #region 事件
@@ -39,19 +43,20 @@ public class Player : MonoBehaviour
         PlayerAim= GetComponent<Animator>();
        // Target = GameObject.FindGameObjectWithTag("Target").transform;
         Target = GameObject.Find("目標").transform;//簡寫
+        _HPControl = transform.Find("血條系統").GetComponent<HPbarControl>();//1變形.尋找(子物件)
+        
     }
     private void Update()
     {
         //print("水平位置"+joy.Horizontal);
         //print("垂直位置" + joy.Vertical);
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            StartCoroutine( Attack());
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            Die();
-        }
+            //StartCoroutine( Attack());
+        
+        //if (Input.GetKeyDown(KeyCode.D))
+        //{
+        //    Die();
+        //}
+        
     }
     private void FixedUpdate()
     {
@@ -63,9 +68,17 @@ public class Player : MonoBehaviour
    /// <summary>
    /// 玩家移動方法
    /// </summary>
-    public void Move() 
-    { 
+    public void Move()
+    {
+        if (_PlayerData.hp > 0)
+        {
         PlayerRig.AddForce(new Vector3( -joy.Horizontal * Speed,0, -joy.Vertical * Speed),ForceMode.Impulse);
+            Vector3 PlayerPos = transform.position;//取得玩家座標
+            Vector3 TargetPos = new Vector3(PlayerPos.x - joy.Horizontal, PlayerPos.y, PlayerPos.z - joy.Vertical);
+            //目標座標= 新三維向量(玩家.X+搖桿水平,0(會吃土)改為玩家Y軸高度(可避免吃土),玩家.Y+搖桿垂直)
+            Target.position = TargetPos;
+            PlayerRig.transform.LookAt(Target);//面向目標
+        }
 
         if (joy.Horizontal != 0 || joy.Vertical != 0)//搖桿的水平與垂直不等於0播放走路動畫
         {
@@ -75,26 +88,31 @@ public class Player : MonoBehaviour
         {
             PlayerAim.SetBool("Run", false);
         }
-        Vector3 PlayerPos = transform.position;//取得玩家座標
-        Vector3 TargetPos = new Vector3(PlayerPos.x - joy.Horizontal, PlayerPos.y, PlayerPos.z - joy.Vertical);
-        //目標座標= 新三維向量(玩家.X+搖桿水平,0(會吃土)改為玩家Y軸高度(可避免吃土),玩家.Y+搖桿垂直)
-        Target.position = TargetPos;
-        PlayerRig.transform.LookAt(Target);//面向目標
+       
        // PlayerAim.SetBool("Run", joy.Horizontal != 0 || joy.Vertical != 0);利用邏輯運算值(比較運算值)為布林值的特性
     }
     #region 玩家狀態方法
     IEnumerator Attack()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(_PlayerData.AttackDelay);
         PlayerAim.SetTrigger("Attack");
+        
        
     }
     public void Die()
     {
-        PlayerAim.SetBool("Die", HP <= 0);
+        PlayerAim.SetBool("Die", _PlayerData.hp <= 0);
     }
+    /// <summary>
+    /// 玩家受傷(傷害值) 顯示傷害值 更新血條 呼叫死亡
+    /// </summary>
+    /// <param name="damage"></param>
     public void Hurt(float damage) 
     {
+        _PlayerData.hp -= damage;
+        _HPControl.UpdateHPbar(_PlayerData.HP_Max, _PlayerData.hp);
+        print(_PlayerData.hp);
+        Die();
     }
     #endregion
 

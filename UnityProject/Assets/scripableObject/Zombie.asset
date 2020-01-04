@@ -10,9 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3796d47d075bb8c4e80bd0ecbb2dac5d, type: 3}
-  m_Name: Zombe
+  m_Name: Zombie
   m_EditorClassIdentifier: 
   hp: 100
-  attack: 10
+  attack: 50
   Speed: 1.5
-  CD: 3.5
+  CD: 3
+  StopDistance: 1.5
+  AttackDistance: 1.2
+  AttackDelay: 0.2
+  CanAttack: 0

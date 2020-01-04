@@ -10,6 +10,10 @@ public class Enemy : MonoBehaviour
     public NavMeshAgent agent;
    public Transform Player;
     public Animator aim;
+    /// <summary>
+    /// 計時器
+    /// </summary>
+    public float timer;
     #endregion
 
     #region 事件
@@ -20,6 +24,8 @@ public class Enemy : MonoBehaviour
         //將代理器的移動速度=敵人資料的速度
         agent.speed = data.Speed;
         Player = GameObject.Find("Player").transform;
+        // agent.SetDestination(Player.position);
+        data.CanAttack = true;
     }
     private void Update()
     {
@@ -33,11 +39,13 @@ public class Enemy : MonoBehaviour
     public virtual void Move() 
     {
     }
-
-    public void Attack() 
+    public virtual void Wait() 
+    {
+    }
+    public virtual void Attack() 
     { 
     }
-    public void Hit() 
+    public  void Hit() 
     {
     }
     public void Dead() 

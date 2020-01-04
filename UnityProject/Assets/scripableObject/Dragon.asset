@@ -13,6 +13,11 @@ MonoBehaviour:
   m_Name: Dragon
   m_EditorClassIdentifier: 
   hp: 500
+  HP_Max: 500
   attack: 15
   Speed: 0
   CD: 3.5
+  StopDistance: 0
+  AttackDistance: 0
+  AttackDelay: 0
+  CanAttack: 1
