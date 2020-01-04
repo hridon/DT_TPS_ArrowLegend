@@ -99,20 +99,39 @@ public class Player : MonoBehaviour
         
        
     }
-    public void Die()
-    {
-        PlayerAim.SetBool("Die", _PlayerData.hp <= 0);
-    }
     /// <summary>
     /// 玩家受傷(傷害值) 顯示傷害值 更新血條 呼叫死亡
     /// </summary>
     /// <param name="damage"></param>
-    public void Hurt(float damage) 
+    public void Hurt(float damage)
     {
+        int _Random = Random.Range(0, 100);
+        float Critical = damage * Random.Range(2, 10);
+        if (_Random<30)
+        {
+            _PlayerData.hp -= Critical;
+            StartCoroutine(_HPControl.UpdateDamage(Critical));
+        }
+        else
+        {
         _PlayerData.hp -= damage;
+        StartCoroutine(_HPControl.UpdateDamage(damage));
+        }
+        _PlayerData.hp = Mathf.Clamp(_PlayerData.hp, 0, 999);
         _HPControl.UpdateHPbar(_PlayerData.HP_Max, _PlayerData.hp);
         print(_PlayerData.hp);
-        Die();
+        if (_PlayerData.hp==0) Die();
+       
+        
+    }
+    /// <summary>
+    /// 玩家死亡方法
+    /// </summary>
+    public void Die()
+    {
+       // PlayerAim.SetBool("Die", _PlayerData.hp == 0); 寫法1
+        PlayerAim.SetBool("Die", true);//寫法2
+        //this.enabled = false;是否啟動該腳本(this此類別)
     }
     #endregion
 

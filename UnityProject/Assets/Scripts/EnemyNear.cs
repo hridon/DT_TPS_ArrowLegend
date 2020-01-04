@@ -60,6 +60,7 @@ public class EnemyNear : Enemy
         if (Physics.SphereCast(transform.position + new Vector3(0, 1, 0),data.AttackDistance/2,transform.forward,out _hit , data.AttackDistance))
         {
             _hit.collider.GetComponent<Player>().Hurt(data.attack);
+            _hit.transform.GetChild(2).GetComponent<HPbarControl>().UpdateDamage(data.attack);
             if (_hit.collider.GetComponent<Player>()._PlayerData.hp <= 0)
             {
                 data.CanAttack = false;
