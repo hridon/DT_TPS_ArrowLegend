@@ -19,7 +19,7 @@ MonoBehaviour:
   CD: 3.5
   StopDistance: 100
   AttackDistance: 150
-  attackoffset: {x: 0, y: 1, z: 0}
+  attackoffset: {x: 0, y: 2, z: 1}
   AttackDelay: 0
   AttackSpeed: 900
   CanAttack: 0

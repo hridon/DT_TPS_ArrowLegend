@@ -13,7 +13,7 @@ public class EnemyFar : Enemy
     IEnumerator CreateBullet()  
     {
         yield return new WaitForSeconds(data.AttackDelay);
-        Vector3 pos = new Vector3(transform.position.x-data.attackoffset.x, data.attackoffset.y, data.attackoffset.z);
+        Vector3 pos = new Vector3(transform.position.x-data.attackoffset.x, data.attackoffset.y, transform.position.z+data.attackoffset.z);
         if (data.CanAttack)
         {
         GameObject Tempbullet=Instantiate(Bullet, pos, Quaternion.identity);
