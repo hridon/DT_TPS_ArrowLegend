@@ -4,46 +4,15 @@ using UnityEngine;
 
 public class EnemyNear : Enemy
 {/// <summary>
-///override 複寫繼承父類別的方法(例:移動)
-/// </summary>
-    public override void Move()
-    {
-        
-        agent.SetDestination(Player.position);//追蹤至玩家位置
-        if (agent.remainingDistance <= data.StopDistance)//如果距離<=指定距離則...
-        {
-            Wait();
-        }
-        else
-        {
-            agent.isStopped = false;//迭代器是否停止
-            aim.SetBool("Run", true);//開起跑步動畫
-        }
-    }
-    public override void Wait()
-    {//base.Wait() //使用父類別方法內容
-        
-            agent.isStopped = true;
-            agent.velocity = Vector3.zero;
-            aim.SetBool("Run", false);//關閉跑步動畫
-        if (timer<=data.CD)//如果計時器<=冷卻時間
-        {
-            timer += Time.deltaTime;//先累加
-           // print("時間" + timer);
-        }
-        else 
-        {
-            Attack();
-        }
-        
-    }
-    public override void Attack()
+ ///override 複寫繼承父類別的方法(例:移動)
+ /// </summary>
+
+    protected override void Attack()
     {
         if (data.CanAttack)
-        {
-        timer = 0;//計時歸零
-        aim.SetTrigger("Attack");
+        { base.Attack(); 
         StartCoroutine(DelayAttack());
+        
         }
     }
     //ctrl+MO快速折疊

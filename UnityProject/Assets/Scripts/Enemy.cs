@@ -7,13 +7,13 @@ public class Enemy : MonoBehaviour
 {
     #region 屬性
     public EnemyData data;
-    public NavMeshAgent agent;
-   public Transform Player;
-    public Animator aim;
+    protected NavMeshAgent agent;//protected 僅允許子類別使用(不顯示於面板上)
+    protected Transform Player;
+    protected Animator aim;
     /// <summary>
     /// 計時器
     /// </summary>
-    public float timer;
+    protected float timer;
     #endregion
 
     #region 事件
@@ -36,14 +36,45 @@ public class Enemy : MonoBehaviour
     #region 方法
 
     //virtual關鍵字可用來修改方法、屬性、索引子或事件宣告，並可在衍生類別中受到覆寫。 例如，繼承這個方法的任何類別均可將其覆寫
-    public virtual void Move() 
+    protected virtual void Move()
     {
+        agent.SetDestination(Player.position);//追蹤至玩家位置
+        Vector3 posTarget = Player.position;
+        posTarget.y= transform.position.y;
+        transform.LookAt(posTarget);
+        if (agent.remainingDistance <= data.StopDistance)//如果距離<=指定距離則...
+        {
+            Wait();
+        }
+        else
+        {
+            agent.isStopped = false;//迭代器是否停止
+            aim.SetBool("Run", true);//開起跑步動畫
+        }
     }
-    public virtual void Wait() 
+    protected virtual void Wait()
     {
+        agent.isStopped = true;
+        agent.velocity = Vector3.zero;
+        aim.SetBool("Run", false);//關閉跑步動畫
+        if (timer <= data.CD)//如果計時器<=冷卻時間
+        {
+            timer += Time.deltaTime;//先累加
+                                    // print("時間" + timer);
+        }
+        else
+        {
+            Attack();
+        }
     }
-    public virtual void Attack() 
-    { 
+    protected virtual void Attack()
+    {
+        if (data.CanAttack)
+        {
+            timer = 0;//計時歸零
+            aim.SetTrigger("Attack");
+          
+        }
     }
     public  void Hit() 
     {

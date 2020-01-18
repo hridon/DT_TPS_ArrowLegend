@@ -17,8 +17,8 @@ public class HPbarControl : MonoBehaviour
         I_HPbar = transform.GetChild(1).GetChild(0).GetComponent<Image>();
         H_HPbar= transform.GetChild(2).GetComponent<Text>();
         H_HPbar.gameObject.SetActive(false);
-
-}
+        
+    }
 // Update is called once per frame
 void Update()
     {
@@ -50,18 +50,18 @@ void Update()
     {
         Vector3 posOriginal = H_HPbar.transform.position;//原始位置
         H_HPbar.gameObject.SetActive(true);
-        if (damage > 50)
+        if (damage > 75)
         {
-            H_HPbar.fontSize = 60;
+            H_HPbar.fontSize = 50;
             H_HPbar.color = Color.red;
         }
         else
         {
-            H_HPbar.fontSize = 40;
+            H_HPbar.fontSize = 30;
             H_HPbar.color = Color.white;
         }
             H_HPbar.text = "-" + damage;
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.01f);
         for (int i = 0; i < 10; i++)
         {
         H_HPbar.transform.position += new Vector3(0,0.1f,0);//傷害值向上移動

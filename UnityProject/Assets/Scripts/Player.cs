@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
        // Target = GameObject.FindGameObjectWithTag("Target").transform;
         Target = GameObject.Find("目標").transform;//簡寫
         _HPControl = transform.Find("血條系統").GetComponent<HPbarControl>();//1變形.尋找(子物件)
-        
+       
     }
     private void Update()
     {
