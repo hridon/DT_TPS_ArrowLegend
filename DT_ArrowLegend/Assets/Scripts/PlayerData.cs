@@ -18,6 +18,8 @@ public class PlayerData : ScriptableObject
     public float AttackDistance;
     [Header("攻擊延遲")]
     public float AttackDelay;
+    [Header("子彈力道")]
+    public float Force;
     #endregion
 
     #region 事件

@@ -18,7 +18,10 @@ public class EnemyFar : Enemy
         {
         GameObject Tempbullet=Instantiate(Bullet, pos, Quaternion.identity);
         Tempbullet.GetComponent<Rigidbody>().AddForce(transform.forward * data.AttackSpeed);
+        Tempbullet.GetComponent<BulletControl>().isPlayer = false;
+        Tempbullet.GetComponent<BulletControl>().damage = data.attack;
         }
+        
        // Tempbullet.AddComponent<BulletControl>(); 給物件添加指定元件
     }
 }

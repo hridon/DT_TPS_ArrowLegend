@@ -11,7 +11,7 @@ public class HPbarControl : MonoBehaviour
     public Text H_HPbar;
     [Header("HPbar圖片")]
     public Image I_HPbar;
-    private void Start()
+    private void Awake()
     {
         T_HPbar = transform.GetChild(0).GetComponent<Text>();
         I_HPbar = transform.GetChild(1).GetChild(0).GetComponent<Image>();

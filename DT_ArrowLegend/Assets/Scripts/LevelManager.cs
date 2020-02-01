@@ -25,6 +25,9 @@ public class LevelManager : MonoBehaviour
     /// 取得載入場景資訊
     /// </summary>
     AsyncOperation ao;
+    [Header("目標是否存在")]
+    public bool haveTarget;
+    public int TargetCount;
     #endregion
     #region 事件
 
@@ -35,6 +38,7 @@ public class LevelManager : MonoBehaviour
         PanelReBorn = GameObject.Find("復活介面").GetComponent<CanvasGroup>();
             TextReBorn= GameObject.Find("等待秒數Text").GetComponent<Text>();
         PanelReBorn.alpha= 0;
+        TargetCount = 1;
         if (AutoOpen)
         {
             if (m_randomSkill.active==false)
@@ -100,17 +104,18 @@ public class LevelManager : MonoBehaviour
         //yield return new WaitForSeconds(0.01f);
         //print(ao.progress);
     }
-  /// <summary>
-  /// 復活倒數計時方法
-  /// </summary>
-  /// <returns></returns>
-    public IEnumerator countdownReborn() 
+    /// <summary>
+    /// 復活倒數計時方法
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator countdownReborn()
     {
         PanelReBorn.alpha = 1;
         PanelReBorn.interactable = true;
         PanelReBorn.blocksRaycasts = true;
         for (int i = 10; i >= 0; i--)
-        {   if (i<10)
+        {
+            if (i < 10)
             {
                 TextReBorn.text = "0" + i;
             }
@@ -119,12 +124,19 @@ public class LevelManager : MonoBehaviour
         }
         PanelReBorn.transform.GetChild(2).GetComponent<Button>().interactable = false;
         yield return new WaitForSeconds(2f);
-        PanelReBorn.alpha = 0;
-        PanelReBorn.interactable = false;
-        PanelReBorn.blocksRaycasts = false;
+        HidePanelReBorn();
         yield return new WaitForSeconds(3f);
         SceneManager.LoadScene("選單畫面");
        
+    }
+    /// <summary>
+    /// 隱藏復活畫面
+    /// </summary>
+    public void HidePanelReBorn()
+    {
+        PanelReBorn.alpha = 0;
+        PanelReBorn.interactable = false;
+        PanelReBorn.blocksRaycasts = false;
         
     }
     /// <summary>

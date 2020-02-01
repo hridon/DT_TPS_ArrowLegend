@@ -14,6 +14,10 @@ public class Enemy : MonoBehaviour
     /// 計時器
     /// </summary>
     protected float timer;
+     HPbarControl _HPControl;
+    float hp;//個別血量
+    public LevelManager m_level;
+    public Player _player;
     #endregion
 
     #region 事件
@@ -24,7 +28,11 @@ public class Enemy : MonoBehaviour
         //將代理器的移動速度=敵人資料的速度
         agent.speed = data.Speed;
         Player = GameObject.Find("Player").transform;
+        _player = GameObject.Find("Player").GetComponent<Player>();
         // agent.SetDestination(Player.position);
+        _HPControl = transform.Find("血條系統").GetComponent<HPbarControl>();
+        hp = data.HP_Max;
+        _HPControl.UpdateHPbar(data.HP_Max,hp);
         data.CanAttack = true;
     }
     private void Update()
@@ -76,11 +84,23 @@ public class Enemy : MonoBehaviour
           
         }
     }
-    public  void Hit() 
+    public  void Hit(float damage) 
     {
+        hp -= damage;
+        hp = Mathf.Clamp(hp, 0, 999);
+        _HPControl.UpdateHPbar(data.HP_Max, hp);
+        StartCoroutine(_HPControl.UpdateDamage(damage));
+        if (hp == 0) Dead();
     }
-    public void Dead() 
+    public void Dead()
     {
+       // if (aim.GetBool("Die")) return;
+        aim.SetBool("Die", true);
+       // m_level.TargetCount -= 1;
+        _player.enemies.Clear();
+        Destroy(gameObject, 0.8f);
+    //this.enabled = false;// 是否啟動該腳本
+   
     }
     #endregion
 }
