@@ -33,6 +33,8 @@ public class EnemyNear : Enemy
             if (_hit.collider.GetComponent<Player>()._PlayerData.hp <= 0)
             {
                 data.CanAttack = false;
+                StopCoroutine(DelayAttack());
+               
             }
            
             //print(_hit.collider.gameObject+"受到"+ data.attack+"傷害");//碰撞到的物件名稱

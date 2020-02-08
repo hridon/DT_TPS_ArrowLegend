@@ -338,6 +338,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: N_ShowRandom
       objectReference: {fileID: 0}
+    - target: {fileID: 1404653969, guid: 6084655d145f86b419a2da98cbfae5d7, type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6084655d145f86b419a2da98cbfae5d7, type: 3}
 --- !u!114 &182776962 stripped
@@ -3315,6 +3319,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1232987822}
   - component: {fileID: 1232987821}
+  - component: {fileID: 1232987823}
   m_Layer: 0
   m_Name: GameMannger
   m_TagString: Untagged
@@ -3341,9 +3346,12 @@ MonoBehaviour:
   Cross: {fileID: 182776964}
   PanelReBorn: {fileID: 182776963}
   TextReBorn: {fileID: 182776962}
+  panelResult: {fileID: 0}
   stageName: 
   haveTarget: 0
   TargetCount: 0
+  isBossStage: 0
+  sceneIndex: 0
 --- !u!4 &1232987822
 Transform:
   m_ObjectHideFlags: 0
@@ -3358,6 +3366,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1232987823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1232987820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c1852fa07906c2409d0996d4dcc61e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LM: {fileID: 0}
+  m_Player: {fileID: 0}
 --- !u!43 &1342114981
 Mesh:
   m_ObjectHideFlags: 0
@@ -4009,21 +4031,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6138289153525210841, guid: 715bef67d0e3f784eab564632aab92d9,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6138289153525210840, guid: 715bef67d0e3f784eab564632aab92d9,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -15
-      objectReference: {fileID: 0}
-    - target: {fileID: 6138289153525210840, guid: 715bef67d0e3f784eab564632aab92d9,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.8
-      objectReference: {fileID: 0}
     - target: {fileID: 3495582302511755894, guid: 715bef67d0e3f784eab564632aab92d9,
         type: 3}
       propertyPath: m_Mesh
@@ -4044,5 +4051,20 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 387583251}
+    - target: {fileID: 6138289153525210840, guid: 715bef67d0e3f784eab564632aab92d9,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138289153525210840, guid: 715bef67d0e3f784eab564632aab92d9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138289153525210841, guid: 715bef67d0e3f784eab564632aab92d9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 715bef67d0e3f784eab564632aab92d9, type: 3}

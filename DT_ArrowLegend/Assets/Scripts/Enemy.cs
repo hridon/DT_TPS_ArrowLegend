@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour
     float hp;//個別血量
     public LevelManager m_level;
     public Player _player;
+    public GameObject Coin;
     #endregion
 
     #region 事件
@@ -88,7 +89,7 @@ public class Enemy : MonoBehaviour
     public  void Hit(float damage) 
     {
         hp -= damage;
-        hp = Mathf.Clamp(hp, 0, 999);
+        hp = Mathf.Clamp(hp, 0,9999);
         _HPControl.UpdateHPbar(data.HP_Max, hp);
         StartCoroutine(_HPControl.UpdateDamage(damage));
         if (hp == 0) Dead();
@@ -102,9 +103,22 @@ public class Enemy : MonoBehaviour
         aim.SetBool("Die", true);
        // m_level.TargetCount -= 1;
         _player.enemies.Clear();
+        CrateCoin();
         Destroy(gameObject, 0.8f);
     //this.enabled = false;// 是否啟動該腳本
    
+    }
+
+    public void CrateCoin() 
+    {
+        
+        int r = (int)Random.Range(data.CoineRange.x, data.CoineRange.y);//(int)強制轉型int
+        for (int i = 0; i < r; i++)
+        {GameObject Item= Instantiate(Coin, transform.position + transform.up * 5, Quaternion.identity);
+            
+            Item.GetComponent<ItemManager>().Pass = true;
+            
+        }
     }
     #endregion
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyData : ScriptableObject //腳本化物件 將資料儲存於專案中
 {
     #region 屬性
-   [Header("血量"),Range(0,999)]
+   [Header("血量"),Range(0,9999)]
     public float hp = 100;
     [Header("最大血量"), Range(0, 9999)]
     public float HP_Max = 100;
@@ -27,6 +27,9 @@ public class EnemyData : ScriptableObject //腳本化物件 將資料儲存於�
     public float AttackSpeed;
     [Header("是否可以攻擊")]
     public bool CanAttack=true;
+    [Header("金幣的最大最小值")]
+    public Vector2 CoineRange;
+        
     #endregion
 
     #region 事件

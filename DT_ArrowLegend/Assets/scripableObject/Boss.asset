@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3796d47d075bb8c4e80bd0ecbb2dac5d, type: 3}
   m_Name: Boss
   m_EditorClassIdentifier: 
-  hp: 999
-  HP_Max: 999
+  hp: 500
+  HP_Max: 500
   attack: 125
   Speed: 0
   CD: 3.5
@@ -23,3 +23,4 @@ MonoBehaviour:
   AttackDelay: 0
   AttackSpeed: 1000
   CanAttack: 1
+  CoineRange: {x: 30, y: 100}

@@ -240,19 +240,17 @@ public class Player : MonoBehaviour
     public void Reborn()
     {
        
-        StopCoroutine(m_level.countdownReborn());
+      //StopCoroutine(m_level.countdownReborn());
         _PlayerData.hp = _PlayerData.HP_Max;
         _HPControl.UpdateHPbar(_PlayerData.HP_Max, _PlayerData.hp);
         PlayerAim.SetBool("Die", false);
         //this.enabled = true;
-        //while (true)
-        //{
-        //    GameObject.FindObjectOfType<DragonControl>().data.CanAttack = true;
-        //}
-        
-            
-        
-        
+        GameObject.FindWithTag("Enemy").GetComponent<Enemy>().data.CanAttack = true;
+
+
+
+
+
     }
     #endregion
 
@@ -272,6 +270,7 @@ public class Player : MonoBehaviour
             }
             
         }
+       
     }
     #endregion
     #endregion

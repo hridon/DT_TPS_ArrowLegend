@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 3764663603406679758}
   - component: {fileID: 4008145173994462558}
   - component: {fileID: 4008145173994462557}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DragonBoss
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -146,7 +146,7 @@ Transform:
   m_GameObject: {fileID: 3764663603465910394}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -12.27}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 3764663603465741724}
   - {fileID: 3764663603465741720}
@@ -184,7 +184,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.97
+  m_Radius: 2
   m_Center: {x: 0, y: 2.04, z: 0}
 --- !u!114 &3764663603406679758
 MonoBehaviour:
@@ -198,10 +198,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30ab341752b439044ad50a925944f26a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: acd26edece2715948b590a4d6663ccbf, type: 2}
+  data: {fileID: 11400000, guid: ec39b5f3ebba2674689c3a7bbbd3223d, type: 2}
   m_level: {fileID: 0}
   _player: {fileID: 0}
-  Bullet: {fileID: 4815279616385742310, guid: bf20c0cf13c4fae46a524dbb98de780d, type: 3}
+  Coin: {fileID: 6906907850437949037, guid: 744ce56ebb16fc34ca1002d7331962a1, type: 3}
+  Bullet: {fileID: 738059653454086681, guid: bd82717f4fcb7f0419751d9dbd003057, type: 3}
 --- !u!54 &4008145173994462558
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1915,6 +1916,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 829065878683050587, guid: 2f3a1e956206dfb45a30cac99b9f1333,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 829065878683050587, guid: 2f3a1e956206dfb45a30cac99b9f1333,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 829065878683050587, guid: 2f3a1e956206dfb45a30cac99b9f1333,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 829065879181153127, guid: 2f3a1e956206dfb45a30cac99b9f1333,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 829065879181153127, guid: 2f3a1e956206dfb45a30cac99b9f1333,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 829065879181153127, guid: 2f3a1e956206dfb45a30cac99b9f1333,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 829065879095386145, guid: 2f3a1e956206dfb45a30cac99b9f1333,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 52.38
       objectReference: {fileID: 0}
     - target: {fileID: 829065878206134068, guid: 2f3a1e956206dfb45a30cac99b9f1333,
         type: 3}

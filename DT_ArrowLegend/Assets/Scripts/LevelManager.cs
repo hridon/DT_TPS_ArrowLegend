@@ -19,6 +19,8 @@ public class LevelManager : MonoBehaviour
     public CanvasGroup PanelReBorn;
     [Header("復活倒數文字")]
     public Text TextReBorn;
+    [Header("結算介面")]
+    public GameObject panelResult;
     Animator Door;
     public string stageName;
     /// <summary>
@@ -30,15 +32,24 @@ public class LevelManager : MonoBehaviour
     public int TargetCount;
     [Header("是否為魔王關")]
     public bool isBossStage;
+   public int sceneIndex;
+    private AdsManager adsManager;
     #endregion
     #region 事件
 
     private void Start()
     {
-        Cross = GameObject.Find("轉場畫面").GetComponent<Image>();
+        adsManager = FindObjectOfType<AdsManager>();
+           Cross = GameObject.Find("轉場畫面").GetComponent<Image>();
            Door = GameObject.Find("門").GetComponent<Animator>();
         PanelReBorn = GameObject.Find("復活介面").GetComponent<CanvasGroup>();
             TextReBorn= GameObject.Find("等待秒數Text").GetComponent<Text>();
+        panelResult = GameObject.Find("結算畫面");
+        PanelReBorn.transform.Find("復活按鈕").GetComponent<Button>().onClick.AddListener(adsManager.ShowAD);
+        PanelReBorn.transform.Find("回首頁按鈕").GetComponent<Button>().onClick.AddListener(BackToMenu);
+
+
+
         PanelReBorn.alpha= 0;
         TargetCount = 1;
         if (AutoOpen)
@@ -52,6 +63,15 @@ public class LevelManager : MonoBehaviour
         if (ShowRandomSkill)
         {
             C_ShowRandom();
+        }
+        if (sceneIndex==5)
+        {
+            isBossStage = true;
+
+        }
+        else
+        {
+            isBossStage = false;
         }
 
     }
@@ -85,8 +105,23 @@ public class LevelManager : MonoBehaviour
    /// 顯示結算畫面
    /// </summary>
     public void ShowClearInfo() 
-    {
+
+    { panelResult.GetComponent<CanvasGroup>().interactable = true;
+        panelResult.GetComponent<CanvasGroup>().blocksRaycasts = true;
+        panelResult.GetComponent<CanvasGroup>().alpha=1;
+        panelResult.GetComponent<Button>().onClick.AddListener(BackToMenu);//按鈕點擊.增加監聽(方法)
+        int currentLevel = SceneManager.GetActiveScene().buildIndex;
+        panelResult.GetComponent<Animator>().SetTrigger("開啟結算畫面觸發");
+        panelResult.transform.Find("關卡文字").GetComponent<Text>().text = "Stage" + currentLevel;
+
     }
+    public void CloseClearInfo()
+    {
+    
+    
+    
+    }
+
 
     /// <summary>
     /// 載入關卡
@@ -94,7 +129,7 @@ public class LevelManager : MonoBehaviour
     IEnumerator LoadLevel() 
     {//取得載入場景資訊=要載入場景的資訊
        
-        int sceneIndex =SceneManager.GetActiveScene().buildIndex;//取得當前場景在buildsetting的索引值
+        sceneIndex =SceneManager.GetActiveScene().buildIndex;//取得當前場景在buildsetting的索引值
         //ao = SceneManager.LoadSceneAsync(stageName, LoadSceneMode.Single);
         ao = SceneManager.LoadSceneAsync(++sceneIndex);
         ao.allowSceneActivation = false;//是否允許載入場景
@@ -120,6 +155,7 @@ public class LevelManager : MonoBehaviour
     /// <returns></returns>
     public IEnumerator countdownReborn()
     {
+        PanelReBorn.transform.GetChild(2).GetComponent<Button>().interactable = true;
         PanelReBorn.alpha = 1;
         PanelReBorn.interactable = true;
         PanelReBorn.blocksRaycasts = true;
@@ -147,10 +183,12 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     public void HidePanelReBorn()
     {
+        print(PanelReBorn.gameObject);
         PanelReBorn.alpha = 0;
         PanelReBorn.interactable = false;
         PanelReBorn.blocksRaycasts = false;
-        StopCoroutine(countdownReborn());
+
+      //StopCoroutine(countdownReborn());
     }
     /// <summary>
     /// 回首頁
