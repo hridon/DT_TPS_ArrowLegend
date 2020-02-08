@@ -143,12 +143,18 @@ public class Player : MonoBehaviour
             }
             else
             {
-          
+                timer = 0;
                // yield return new WaitForSeconds(2f)
                 enemies.Clear();//先清除清單
                 enemies = FindObjectsOfType<Enemy>().ToList();//加入清單
-                if (enemies.Count == 0) return;
-                print(m_level.TargetCount);
+
+                if (enemies.Count == 0)
+                {
+                    print("過關");
+                    m_level.PassLevel();
+                    return;//如果沒有敵人 跳出
+                } 
+                
                 //陣列數量 length 
                 //清單數量 count
                 enemiesDis.Clear();
@@ -226,20 +232,27 @@ public class Player : MonoBehaviour
         if (PlayerAim.GetBool("Die")) return;//如果角色已死亡跳出此方法
         PlayerAim.SetBool("Die", true);//寫法2
         //this.enabled = false;是否啟動該腳本(this此類別)
-        StopCoroutine(m_level.countdownReborn());
+        StartCoroutine(m_level.countdownReborn());
     }
 /// <summary>
 /// 玩家復活方法
 /// </summary>
     public void Reborn()
     {
-        m_level.HidePanelReBorn();
+       
         StopCoroutine(m_level.countdownReborn());
         _PlayerData.hp = _PlayerData.HP_Max;
         _HPControl.UpdateHPbar(_PlayerData.HP_Max, _PlayerData.hp);
         PlayerAim.SetBool("Die", false);
         //this.enabled = true;
-       
+        //while (true)
+        //{
+        //    GameObject.FindObjectOfType<DragonControl>().data.CanAttack = true;
+        //}
+        
+            
+        
+        
     }
     #endregion
 
@@ -248,7 +261,16 @@ public class Player : MonoBehaviour
     {
         if (hit.GetComponent<Collider>().tag=="傳送區域")
         {
-            m_level.StartCoroutine("LoadLevel");
+            if (m_level.isBossStage)
+            {
+                print("顯示結算畫面");
+                m_level.ShowClearInfo();
+            }
+            else
+            {
+                m_level.StartCoroutine("LoadLevel");
+            }
+            
         }
     }
     #endregion

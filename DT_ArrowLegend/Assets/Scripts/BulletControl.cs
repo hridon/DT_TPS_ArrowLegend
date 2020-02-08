@@ -28,11 +28,11 @@ public class BulletControl : MonoBehaviour
             if (hit.tag == "Player")
             {
                 hit.GetComponent<Player>().Hurt(damage);
-                Destroy(gameObject, 0.1f);
                 if (hit.GetComponent<Player>()._PlayerData.hp <= 0)
                 {
-                    GameObject.Find("Dragon").GetComponent<DragonControl>().data.CanAttack = false;
+                    GameObject.FindObjectOfType<DragonControl>().data.CanAttack = false;
                 }
+                Destroy(gameObject, 0.1f);
             }
         }
         else

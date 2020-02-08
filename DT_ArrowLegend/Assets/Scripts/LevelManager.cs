@@ -28,6 +28,8 @@ public class LevelManager : MonoBehaviour
     [Header("目標是否存在")]
     public bool haveTarget;
     public int TargetCount;
+    [Header("是否為魔王關")]
+    public bool isBossStage;
     #endregion
     #region 事件
 
@@ -79,14 +81,22 @@ public class LevelManager : MonoBehaviour
     {
         Door.SetTrigger("OPen");
     }
-
+   /// <summary>
+   /// 顯示結算畫面
+   /// </summary>
+    public void ShowClearInfo() 
+    {
+    }
 
     /// <summary>
     /// 載入關卡
     /// </summary>
     IEnumerator LoadLevel() 
     {//取得載入場景資訊=要載入場景的資訊
-        ao= SceneManager.LoadSceneAsync(stageName, LoadSceneMode.Single);
+       
+        int sceneIndex =SceneManager.GetActiveScene().buildIndex;//取得當前場景在buildsetting的索引值
+        //ao = SceneManager.LoadSceneAsync(stageName, LoadSceneMode.Single);
+        ao = SceneManager.LoadSceneAsync(++sceneIndex);
         ao.allowSceneActivation = false;//是否允許載入場景
         //當場景尚未載入完成時
         while (!ao.isDone)
@@ -123,10 +133,13 @@ public class LevelManager : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
         }
         PanelReBorn.transform.GetChild(2).GetComponent<Button>().interactable = false;
-        yield return new WaitForSeconds(2f);
-        HidePanelReBorn();
-        yield return new WaitForSeconds(3f);
-        SceneManager.LoadScene("選單畫面");
+        //yield return new WaitForSeconds(2f);
+        //HidePanelReBorn();
+        //if (AdsManager.Lookad==false)
+        //{
+        //    yield return new WaitForSeconds(3f);
+        //    BackToMenu();
+        //} 
        
     }
     /// <summary>
@@ -137,7 +150,7 @@ public class LevelManager : MonoBehaviour
         PanelReBorn.alpha = 0;
         PanelReBorn.interactable = false;
         PanelReBorn.blocksRaycasts = false;
-        
+        StopCoroutine(countdownReborn());
     }
     /// <summary>
     /// 回首頁
@@ -145,6 +158,14 @@ public class LevelManager : MonoBehaviour
     public void BackToMenu() 
     {
         SceneManager.LoadScene("選單畫面");
+    }
+
+    /// <summary>
+    /// 過關:場景上沒有怪物時前往下一關
+    /// </summary>
+    public void PassLevel() 
+    {
+        OpenDoor();
     }
     #endregion
 }

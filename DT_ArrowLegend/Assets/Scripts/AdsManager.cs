@@ -14,6 +14,7 @@ public class AdsManager : MonoBehaviour,IUnityAdsListener
     string PlacementReBorn = "revival";//廣告類型 名稱(例:復活)
     public LevelManager LM;
     public Player m_Player;
+    public static bool Lookad;
     private void Start()
     {
         LM = GameObject.FindObjectOfType<LevelManager>();
@@ -28,6 +29,8 @@ public class AdsManager : MonoBehaviour,IUnityAdsListener
     {
         if (Advertisement.IsReady(PlacementReBorn))// 如果廣告準備完成
         {
+            Lookad = true;//有看廣告
+
             Advertisement.Show(PlacementReBorn);//廣告 顯示(廣告ID)
         }
     
@@ -61,13 +64,16 @@ public class AdsManager : MonoBehaviour,IUnityAdsListener
 
                 case ShowResult.Skipped://廣告跳過 狀況2
                     print("跳過");
+                    Lookad = false;
                     break;
 
                 case ShowResult.Finished://廣告完成 狀況3
-                   
+                    
                     print("復活");
+                    
                     LM.HidePanelReBorn();
                     m_Player.Reborn();
+                    Lookad = false;
                     break;
                
                 //default://預設

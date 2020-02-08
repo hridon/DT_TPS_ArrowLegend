@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour
     #region 事件
     private void Start()
     {
+        m_level = FindObjectOfType<LevelManager>();//透過類型取得元件
         aim = GetComponent<Animator>();//先取得元件 再做設定
         agent = GetComponent<NavMeshAgent>();
         //將代理器的移動速度=敵人資料的速度
@@ -92,6 +93,9 @@ public class Enemy : MonoBehaviour
         StartCoroutine(_HPControl.UpdateDamage(damage));
         if (hp == 0) Dead();
     }
+   /// <summary>
+   /// 怪物死亡方法
+   /// </summary>
     public void Dead()
     {
        // if (aim.GetBool("Die")) return;
