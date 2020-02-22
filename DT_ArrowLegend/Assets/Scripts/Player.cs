@@ -71,7 +71,7 @@ public class Player : MonoBehaviour
     }
     private void Start()
     {
-       
+        _HPControl.UpdateHPbar(_PlayerData.HP_Max, _PlayerData.hp);
 
 
     }
@@ -261,14 +261,18 @@ public class Player : MonoBehaviour
         {
             if (m_level.isBossStage)
             {
-                print("顯示結算畫面");
-                m_level.ShowClearInfo();
+               
             }
             else
             {
                 m_level.StartCoroutine("LoadLevel");
             }
             
+        }
+        if (hit.GetComponent<Collider>().tag == "ShowTheEnd")
+        {
+            print("顯示結算畫面");
+            m_level.ShowClearInfo();
         }
        
     }

@@ -5608,6 +5608,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7595214448809452283, guid: 6084655d145f86b419a2da98cbfae5d7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1232987821}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6084655d145f86b419a2da98cbfae5d7, type: 3}
 --- !u!1 &971030426
@@ -11585,7 +11590,7 @@ GameObject:
   - component: {fileID: 2026569652}
   m_Layer: 5
   m_Name: "\u50B3\u9001\u9580"
-  m_TagString: "\u50B3\u9001\u5340\u57DF"
+  m_TagString: ShowTheEnd
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

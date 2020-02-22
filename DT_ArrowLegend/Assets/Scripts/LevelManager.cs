@@ -176,7 +176,14 @@ public class LevelManager : MonoBehaviour
         //    yield return new WaitForSeconds(3f);
         //    BackToMenu();
         //} 
-       
+        if (!AdsManager.Lookad) 
+        {
+            BackToMenu();
+        }
+        else 
+        {
+            AdsManager.Lookad = false;
+        }
     }
     /// <summary>
     /// 隱藏復活畫面

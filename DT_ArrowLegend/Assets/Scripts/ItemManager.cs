@@ -24,9 +24,9 @@ public class ItemManager : MonoBehaviour
     {
         if (Pass)
         {
-            transform.position = Vector3.Lerp(transform.position, Player.position, 0.1f * 10 * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, Player.position, 0.3f * 10 * Time.deltaTime);
            //nvoke("gnoreCollision, 0.1f);
-            if (Vector3.Distance(transform.position, Player.position)<1)//如果金幣與玩家距離<指定距離
+            if (Vector3.Distance(transform.position, Player.position)<2)//如果金幣與玩家距離<指定距離
             {
                 Destroy(gameObject, 0.01f);
             }

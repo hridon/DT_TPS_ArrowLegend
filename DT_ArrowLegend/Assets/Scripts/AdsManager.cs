@@ -10,7 +10,7 @@ public class AdsManager : MonoBehaviour,IUnityAdsListener
    /// <summary>
    /// 是否為測試模式
    /// </summary>
-    bool testmode=true;
+    bool testmode=false;
     string PlacementReBorn = "revival";//廣告類型 名稱(例:復活)
     public LevelManager LM;
     public Player m_Player;
@@ -73,6 +73,7 @@ public class AdsManager : MonoBehaviour,IUnityAdsListener
                     
                     LM.HidePanelReBorn();
                     m_Player.Reborn();
+                   // GameObject.Find("Player").GetComponent<Player>().Reborn();
                     Lookad = false;
                     break;
                

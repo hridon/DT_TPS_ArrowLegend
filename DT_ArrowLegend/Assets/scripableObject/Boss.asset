@@ -23,4 +23,4 @@ MonoBehaviour:
   AttackDelay: 0
   AttackSpeed: 1000
   CanAttack: 1
-  CoineRange: {x: 30, y: 100}
+  CoineRange: {x: 10, y: 20}
